@@ -27,32 +27,52 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            /* 👇 ДОБАВЛЯЕМ ПОДЛОЖКУ, чтобы сайт не просвечивал 👇 */
-            background: #1a0303; 
+            background: transparent; 
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             overflow: hidden;
             perspective: 2000px;
-            /* Плавное исчезновение подложки в конце */
-            transition: opacity 1s ease 3s, visibility 1s ease 3s; 
+            /* 👇 УБИРАЕМ ИСЧЕЗНОВЕНИЕ КОНТЕЙНЕРА 👇 */
+            /* transition: opacity 1s ease 4s, visibility 1s ease 4s; */
         }
 
         #envelope-screen.opened {
+            /* Оставляем только pointer-events, чтобы не мешал кликать по сайту */
+            pointer-events: none;
+            /* visibility: hidden;  <-- Убираем, чтобы не пропадало раньше времени */
+        }
+
+        /* 👇 ВСТАВЛЯЙТЕ СЮДА 👇 */
+        .envelope-bg {
+            position: absolute;
+            inset: 0;
+            background: #1a0303; /* Темный фон, скрывающий сайт при загрузке */
+            z-index: 0; /* Лежит под створками */
+            transition: opacity 1s ease;
+        }
+
+        /* При клике фон очень быстро растворяется (за 1 секунду) */
+        #envelope-screen.opened .envelope-bg {
             opacity: 0;
-            visibility: hidden;
             pointer-events: none;
         }
+        /* 👆 КОНЕЦ ВСТАВКИ 👆 */
 
         .envelope-wrapper {
             position: relative;
             /* 👇 АДАПТИВНЫЕ ПРОПОРЦИИ 👇 */
             width: min(85vw, 1200px);
             height: min(70vh, 800px);
-            /* Тень вокруг всего конверта, чтобы он выделялся */
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            border-radius: 4px;
+            
+            /* 👇 Убираем фон и тень, чтобы не было белого прямоугольника 👇 */
+            box-shadow: none; 
+            border-radius: 0;
+            background: transparent;
+            
+            /* 👇 Обертка тоже растворяется вместе с боками (за 1.5 сек) 👇 */
+            transition: opacity 1.5s ease;
         }
 
         /* На телефонах конверт должен быть повыше */
@@ -156,32 +176,55 @@
         /* ============================================================ */
         /* АНИМАЦИЯ ОТКРЫТИЯ                                            */
         /* ============================================================ */
-        
-        /* Верхний и нижний улетают */
+
+        /* Верхний треугольник улетает */
         #envelope-screen.opened .env-top {
             transform: translateY(-110vh);
+            opacity: 0;
+            /* 👇 5 секунд, равномерное движение (ease-in-out) 👇 */
+            transition: transform 5s ease-in-out, opacity 0.5s ease 4.5s;
+            will-change: transform, opacity;
         }
+
+        /* Печать улетает вместе с верхним треугольником */
         #envelope-screen.opened .env-seal {
-            /* Двигаем вверх вместе с треугольником, без поворота */
             transform: translate(-50%, -110vh); 
+            opacity: 0;
+            /* 👇 5 секунд, та же скорость 👇 */
+            transition: transform 5s ease-in-out, opacity 0.5s ease 4.5s;
+            will-change: transform, opacity;
         }
+
+        /* Нижний треугольник улетает */
         #envelope-screen.opened .env-bottom {
             transform: translateY(110vh);
+            opacity: 0;
+            /* 👇 5 секунд, та же скорость 👇 */
+            transition: transform 5s ease-in-out, opacity 0.5s ease 4.5s;
         }
 
         /* Левый и правый плавно растворяются (становятся прозрачными) */
         #envelope-screen.opened .env-left,
         #envelope-screen.opened .env-right {
             opacity: 0;
-            /* Боковые исчезают за 2 секунды (быстрее, чем едут центральные) */
-            transition: opacity 2s ease; 
+            transition: opacity 1.5s ease; 
         }
 
         /* Текст исчезает */
         #envelope-screen.opened .env-text,
         #envelope-screen.opened .open-hint {
             opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
         }
+
+        /* 👇 ВОТ ЗДЕСЬ ВАЖНОЕ ИСПРАВЛЕНИЕ 👇 */
+        /* Когда всё улетело (через 5 секунды), контейнер полностью скрывается */
+        #envelope-screen.opened {
+            pointer-events: none;
+            visibility: hidden;
+            transition: visibility 0s 3s; /* Исчезнет только через 4 секунды */
+        }    
 
         /* ============================================================ */
         /* ОСНОВНОЙ КОНТЕНТ                                             */
@@ -901,6 +944,9 @@
 <!-- КОНВЕРТ НА ВЕСЬ ЭКРАН (4 ТРЕУГОЛЬНИКА)                       -->
 <!-- ============================================================ -->
 <div id="envelope-screen">
+    <!-- Новый фон, который исчезнет при клике -->
+    <div class="envelope-bg"></div>
+
     <div class="envelope-wrapper">
         
         <div class="env-part env-left"></div>
@@ -996,8 +1042,6 @@
     <section class="section rounded-photo fade-up">
         <div class="photo-wrapper">
             <!-- 👇👇👇 ЗАМЕНИТЕ НА ПУТЬ К ВАШЕМУ ОБЩЕМУ ФОТО 👇👇👇 -->
-            <img src="https://ilidan179.github.io/wedding/images/IMG_5747.jpeg" class
-
             <img src="https://ilidan179.github.io/wedding/images/IMG_5747.jpeg" class="wedding-photo" alt="Алина и Дмитрий">
         </div>
     </section>
