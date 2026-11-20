@@ -102,7 +102,7 @@
         }
         #main-content.revealed { opacity: 1; }
 
-        /* ========== СЕКЦИЯ ЗНАКОМСТВА ========== */
+        /* ========== СЕКЦИЯ ЗНАКОМСТВА (ПОЛАРОИД) ========== */
         .reveal-section {
             min-height: 100vh;
             display: flex;
@@ -110,91 +110,148 @@
             align-items: center;
             justify-content: center;
             padding: 60px 20px;
-            background: linear-gradient(180deg, #fefaf7 0%, #fbf0e8 100%);
-            gap: 60px;
-        }
-        .groom-block {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 18px;
-        }
-        .question {
-            font-family: 'Great Vibes', 'Playfair Display', cursive;
-            font-size: clamp(26px, 5vw, 46px);
-            color: #b17a5c;
-            line-height: 1.2;
-            max-width: 600px;
-        }
-        .groom-photo {
-            width: min(70vw, 340px);
-            aspect-ratio: 3 / 4;
-            object-fit: cover;
-            border-radius: 24px;
-            box-shadow: 0 25px 45px -15px rgba(90, 60, 40, 0.35);
-            border: 6px solid #fff;
+            background: #fdf9f1; /* Теплый бумажный фон */
+            gap: 40px;
         }
 
-        /* Блок невесты */
-        .bride-block {
-            position: relative;
-            width: min(70vw, 340px);
-            aspect-ratio: 3 / 4;
-            cursor: pointer;
-            perspective: 1200px;
+        .question {
+            font-family: 'Great Vibes', 'Playfair Display', cursive;
+            font-size: clamp(32px, 6vw, 56px);
+            color: #8e1b12; /* Темно-красный, как на конверте */
+            line-height: 1.2;
+            text-align: center;
+            transform: rotate(-3deg); /* Легкий наклон, как рукописный текст */
+            margin-bottom: 20px;
         }
+
+        .photos-row {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            gap: clamp(20px, 5vw, 60px); /* Расстояние между фото */
+            width: 100%;
+            max-width: 900px;
+        }
+
+        /* Стиль карточки Полароид */
+        .polaroid {
+            background: #fff;
+            padding: 15px 15px 50px 15px; /* Снизу больше места для подписи */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+            width: min(42vw, 320px); /* Адаптивная ширина */
+            aspect-ratio: 3 / 4;
+        }
+
+        /* Наклоняем фото жениха и невесты для живости */
+        .groom-card { transform: rotate(-2deg); }
+        .bride-card { transform: rotate(2deg); }
+
+        .polaroid-img-wrapper {
+            width: 100%;
+            height: 100%;
+            background: #e0e0e0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .polaroid-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Скрепка сверху */
+        .paperclip {
+            position: absolute;
+            top: -25px;
+            right: 30px;
+            font-size: 50px;
+            color: #8e1b12;
+            transform: rotate(10deg);
+            z-index: 10;
+            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.3));
+            /* Рисуем скрепку через SVG фон, чтобы она выглядела реалистично */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238e1b12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 40px;
+            height: 60px;
+        }
+
+        /* Красная бумага для невесты */
         .bride-cover {
             position: absolute;
             inset: 0;
-            background: linear-gradient(160deg, #d64535 0%, #a8231a 100%);
-            border-radius: 24px;
+            background: #7a1010; /* Темно-красный */
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 20px;
-            color: #fff;
-            font-family: 'Great Vibes', 'Playfair Display', cursive;
-            font-size: clamp(22px, 4.5vw, 34px);
-            box-shadow: 0 25px 45px -15px rgba(140, 30, 20, 0.5);
-            border: 6px solid #fff;
-            transition: transform 0.9s cubic-bezier(0.4, 0.1, 0.2, 1), opacity 0.9s ease;
-            transform-origin: left center;
-            z-index: 3;
+            cursor: pointer;
+            transition: transform 0.8s cubic-bezier(0.4, 0.1, 0.2, 1), opacity 0.8s ease;
+            transform-origin: right center; /* Открывается как книжка */
+            z-index: 5;
         }
-        .bride-block.revealed .bride-cover {
-            transform: rotateY(-105deg);
+
+        .bride-cover span {
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(16px, 3vw, 22px);
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Анимация открытия невесты */
+        .bride-card.revealed .bride-cover {
+            transform: rotateY(-110deg);
             opacity: 0;
             pointer-events: none;
         }
-        .bride-photo {
-            position: absolute;
-            inset: 0;
-            width: 100%; height: 100%;
-            object-fit: cover;
-            border-radius: 24px;
-            box-shadow: 0 25px 45px -15px rgba(90, 60, 40, 0.35);
-            border: 6px solid #fff;
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
-        }
-        .bride-block.revealed .bride-photo { opacity: 1; transform: scale(1); }
+
+        /* Подпись "-ей буду я!" */
         .bride-caption {
             position: absolute;
-            bottom: -48px;
-            left: 0;
-            width: 100%;
-            text-align: center;
+            bottom: 10px;
+            right: 20px;
             font-family: 'Great Vibes', 'Playfair Display', cursive;
-            font-size: clamp(26px, 5vw, 42px);
-            color: #b17a5c;
+            font-size: clamp(28px, 5vw, 42px);
+            color: #8e1b12;
             opacity: 0;
             transform: translateY(10px);
-            transition: opacity 0.7s ease 0.9s, transform 0.7s ease 0.9s;
+            transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
+            z-index: 6;
         }
-        .bride-block.revealed .bride-caption { opacity: 1; transform: translateY(0); }
+
+        .bride-card.revealed .bride-caption {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Адаптация для телефонов */
+        @media (max-width: 600px) {
+            .photos-row {
+                gap: 15px;
+            }
+            .polaroid {
+                padding: 8px 8px 30px 8px;
+                width: 44vw; /* Занимает почти половину экрана */
+            }
+            .bride-caption {
+                bottom: 5px;
+                right: 10px;
+            }
+            .paperclip {
+                width: 30px;
+                height: 45px;
+                right: 15px;
+                top: -20px;
+            }
+        }
 
         .scroll-down {
             margin-top: 40px;
@@ -692,20 +749,35 @@
 
     <!-- ============ СЕКЦИЯ: ЖЕНИХ + СКРЫТАЯ НЕВЕСТА ============ -->
     <section class="reveal-section">
-        <div class="groom-block">
-            <p class="question">Интересно, кто будет моей женой?</p>
+        
+        <p class="question">интересно, кто будет<br>моей женой?</p>
 
-            <!-- 👇👇👇 ЗАМЕНИТЕ "images/groom.jpg" НА СВОЁ ФОТО ЖЕНИХА 👇👇👇 -->
-            <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/groom.jpg" alt="Жених" class="groom-photo">
-            <!-- 👆👆👆 ------------------------------------------------- 👆👆👆 -->
-        </div>
+        <div class="photos-row">
+            
+            <!-- ФОТО ЖЕНИХА -->
+            <div class="polaroid groom-card">
+                <div class="polaroid-img-wrapper">
+                    <!-- 👇👇👇 ЗАМЕНИТЕ ССЫЛКУ НА ФОТО ЖЕНИХА 👇👇👇 -->
+                    <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/groom.jpg" alt="Жених">
+                </div>
+            </div>
 
-        <div class="bride-block" id="brideBlock">
-            <div class="bride-cover">Кликни, чтобы узнать</div>
-            <!-- 👇👇👇 ЗАМЕНИТЕ "images/bride.jpg" НА СВОЁ ФОТО НЕВЕСТЫ 👇👇👇 -->
-            <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/bride.jpg" alt="Невеста" class="bride-photo">
-            <!-- 👆👆👆 ------------------------------------------------- 👆👆👆 -->
-            <p class="bride-caption">— ей буду я!</p>
+            <!-- ФОТО НЕВЕСТЫ (СКРЫТОЕ) -->
+            <div class="polaroid bride-card" id="brideBlock">
+                <div class="paperclip"></div> <!-- Скрепка -->
+                <div class="polaroid-img-wrapper">
+                    <!-- 👇👇👇 ЗАМЕНИТЕ ССЫЛКУ НА ФОТО НЕВЕСТЫ 👇👇👇 -->
+                    <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/bride.jpg" alt="Невеста">
+                    
+                    <!-- Красная бумага, которая закрывает фото -->
+                    <div class="bride-cover">
+                        <span>Кликни,<br>чтобы узнать</span>
+                    </div>
+                </div>
+                <!-- Подпись, которая появится после клика -->
+                <p class="bride-caption">-ей буду я!</p>
+            </div>
+
         </div>
 
         <div class="scroll-down">↓</div>
