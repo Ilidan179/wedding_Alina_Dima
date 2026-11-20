@@ -20,63 +20,32 @@
         }
 
         /* ============================================================ */
-        /* КОНВЕРТ НА ВЕСЬ ЭКРАН                                        */
+        /* КОНВЕРТ НА ВЕСЬ ЭКРАН (ВАША КАРТИНКА)                        */
         /* ============================================================ */
         #envelope-screen {
             position: fixed;
             inset: 0;
             z-index: 9999;
-            /* Красный конверт на весь экран */
-            background: linear-gradient(160deg, #d64535 0%, #a8231a 100%);
+            /* 👇 ЗАМЕНИТЕ ССЫЛКУ НА ВАШУ КАРТИНКУ КОНВЕРТА 👇 */
+            background: #8e1b12 url('https://ilidan179.github.io/wedding_Alina_Dima/images/envelope.jpg') center/cover no-repeat;
+            
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: opacity 1s ease, visibility 1s ease;
-            /* Створки конверта через псевдоэлементы */
+            transition: opacity 1.2s ease, visibility 1.2s ease;
             overflow: hidden;
         }
 
-        /* Верхний клапан конверта (треугольник сверху) */
-        #envelope-screen::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%;
-            height: 50%;
-            background: linear-gradient(180deg, #e05a4a 0%, #c0392b 100%);
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            transition: transform 1s cubic-bezier(0.4, 0.1, 0.2, 1);
-            transform-origin: top center;
-            z-index: 2;
-        }
-
-        /* Боковые створки */
-        #envelope-screen::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%;
-            height: 60%;
-            background: linear-gradient(0deg, #b52d22 0%, #a8231a 100%);
-            clip-path: polygon(0 100%, 50% 30%, 100% 100%);
-            z-index: 1;
-        }
-
-        /* Анимация раскрытия: клапан уезжает вверх */
-        #envelope-screen.opened::before {
-            transform: translateY(-100%) rotateX(180deg);
-        }
-
+        /* Эффект "раскрытия": экран плавно растворяется */
         #envelope-screen.opened {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
 
-        /* Печать с сердечком по центру */
+        /* Печать с сердечком (по центру) */
         .seal {
             position: relative;
             z-index: 3;
@@ -110,13 +79,14 @@
             left: 0;
             width: 100%;
             text-align: center;
-            color: rgba(255,255,255,0.9);
+            color: #fff;
             font-size: clamp(14px, 2.5vw, 18px);
             font-weight: 300;
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: hintBlink 2.5s ease-in-out infinite;
             z-index: 3;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
         @keyframes hintBlink {
             0%, 100% { opacity: 0.5; }
@@ -708,7 +678,7 @@
 <body>
 
 <!-- ============================================================ -->
-<!-- КОНВЕРТ НА ВЕСЬ ЭКРАН (кликабельный)                          -->
+<!-- КОНВЕРТ НА ВЕСЬ ЭКРАН (ВАША КАРТИНКА)                        -->
 <!-- ============================================================ -->
 <div id="envelope-screen">
     <div class="seal">❤</div>
@@ -725,4 +695,47 @@
         <div class="groom-block">
             <p class="question">Интересно, кто будет моей женой?</p>
 
-            <!-- 👇👇👇 ЗАМЕНИТЕ "images/groom.jpg" НА СВОЁ ФОТО ЖЕНИХА 👇👇👇
+            <!-- 👇👇👇 ЗАМЕНИТЕ "images/groom.jpg" НА СВОЁ ФОТО ЖЕНИХА 👇👇👇 -->
+            <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/groom.jpg" alt="Жених" class="groom-photo">
+            <!-- 👆👆👆 ------------------------------------------------- 👆👆👆 -->
+        </div>
+
+        <div class="bride-block" id="brideBlock">
+            <div class="bride-cover">Кликни, чтобы узнать</div>
+            <!-- 👇👇👇 ЗАМЕНИТЕ "images/bride.jpg" НА СВОЁ ФОТО НЕВЕСТЫ 👇👇👇 -->
+            <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/bride.jpg" alt="Невеста" class="bride-photo">
+            <!-- 👆👆👆 ------------------------------------------------- 👆👆👆 -->
+            <p class="bride-caption">— ей буду я!</p>
+        </div>
+
+        <div class="scroll-down">↓</div>
+    </section>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Алина<br><span style="font-size: 0.7em;">&</span><br>Дмитрий</h1>
+            <div class="date">19 июня 2027</div>
+        </div>
+    </section>
+
+    <!-- ============ ПРИГЛАШЕНИЕ ============ -->
+    <section class="invite-mountains-full fade-up">
+        <div class="invite-overlay"></div>
+        <div class="invite-content">
+            <h2>Дорогой <br>Гость!</h2>
+            <p>
+                Мы приглашаем Вас разделить<br>
+                с нами радостный день, в который<br>
+                мы официально станем семьей
+            </p>
+            <p class="signature" style="margin-top: 24px; font-family: 'Great Vibes', cursive; font-size: 28px;">Ждем Вас</p>
+            <p style="margin-top: 16px; font-size: 18px;">19.06.2027 в 16:30</p>
+        </div>
+    </section>
+
+    <!-- ============ ФОТО ПАРЫ ============ -->
+    <section class="section rounded-photo fade-up">
+        <div class="photo-wrapper">
+            <!-- 👇👇👇 ЗАМЕНИТЕ НА ПУТЬ К ВАШЕМУ ОБЩЕМУ ФОТО 👇👇👇 -->
+            <img src="https://ilidan179.github.io/wedding/images/IMG_5747.jpeg" class
