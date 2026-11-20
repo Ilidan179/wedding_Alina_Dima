@@ -45,7 +45,7 @@
             pointer-events: none;
         }
 
-        /* Печать с сердечком (по центру) */
+        /* Печать с сердечком (по центру)
         .seal {
             position: relative;
             z-index: 3;
@@ -61,16 +61,16 @@
             color: #b52d22;
             animation: sealPulse 2.2s ease-in-out infinite;
             transition: transform 0.4s ease;
-        }
+        } */
 
-        #envelope-screen:active .seal {
+        /* #envelope-screen:active .seal {
             transform: scale(0.92);
         }
 
         @keyframes sealPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.06); }
-        }
+        } */
 
         /* Текст "Нажмите, чтобы открыть" */
         .open-hint {
@@ -681,7 +681,7 @@
 <!-- КОНВЕРТ НА ВЕСЬ ЭКРАН (ВАША КАРТИНКА)                        -->
 <!-- ============================================================ -->
 <div id="envelope-screen">
-    <div class="seal">❤</div>
+    <!-- <div class="seal">❤</div> -->
     <p class="open-hint">Нажмите, чтобы открыть</p>
 </div>
 
@@ -739,3 +739,357 @@
         <div class="photo-wrapper">
             <!-- 👇👇👇 ЗАМЕНИТЕ НА ПУТЬ К ВАШЕМУ ОБЩЕМУ ФОТО 👇👇👇 -->
             <img src="https://ilidan179.github.io/wedding/images/IMG_5747.jpeg" class
+
+            <img src="https://ilidan179.github.io/wedding/images/IMG_5747.jpeg" class="wedding-photo" alt="Алина и Дмитрий">
+        </div>
+    </section>
+
+    <section class="podpis"> 
+        <div class="photo-caption-light">Две судьбы. Два сердца. Одна семья</div>
+    </section>
+
+    <!-- ============ ДРЕСС-КОД И ПОДАРКИ ============ -->
+    <div class="two-columns fade-up">
+        <div class="info-card dresscode">
+            <h3>Какой дресс-код?</h3>
+            <div class="info-divider"></div>
+            <p>
+                Никаких рамок, только красивые образы.<br>
+                <span class="accent-text">Белый цвет уже занят</span>, а яркие цвета и<br>
+                шорты - в заслуженном отпуске!
+            </p>
+        </div>
+
+        <div class="info-card instead-flowers">
+            <h3>Что дарить?</h3>
+            <div class="info-divider"></div>
+            <p>
+                Не беспокойтесь о выборе подарков и не везите цветов: 
+                мы будем рады подарку в конверте, он
+                поможет нам поехать в свадебное путешествие 💝
+            </p>
+        </div>
+    </div>
+
+    <!-- ============ РАСПИСАНИЕ ============ -->
+    <section class="section schedule fade-up">
+        <h2>Свадебное расписание</h2>
+        <div class="schedule-container">
+            <div class="schedule-item">
+                <div class="schedule-time">16:30<br>19.06.2027</div>
+                <div class="schedule-divider"></div>
+                <div class="schedule-event">
+                    <h3>Общий сбор</h3>
+                    <p>Прибытие гостей, знакомство и рассадка</p>
+                </div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">17:00<br>19.06.2027</div>
+                <div class="schedule-divider"></div>
+                <div class="schedule-event">
+                    <h3>Выездная регистрация</h3>
+                    <p>Торжественная часть мероприятия</p>
+                </div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">17:30<br>19.06.2027</div>
+                <div class="schedule-divider"></div>
+                <div class="schedule-event">
+                    <h3>Банкет</h3>
+                    <p>Ресторан, поздравления, танцы</p>
+                </div>
+            </div>
+            <div class="schedule-item">
+                <div class="schedule-time">22:30<br>19.06.2027</div>
+                <div class="schedule-divider"></div>
+                <div class="schedule-event">
+                    <h3>Окончание банкета</h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ТАЙМЕР ============ -->
+    <section class="section fade-up">
+        <h2>До свадьбы осталось</h2>
+        <div class="timer-digits" id="timerDigits">
+            <div class="time-block">
+                <div class="time-number" id="weeksNum">00</div>
+                <div class="time-label" id="weeksLabel">недель</div>
+            </div>
+            <div class="time-block">
+                <div class="time-number" id="daysNum">00</div>
+                <div class="time-label" id="daysLabel">дней</div>
+            </div>
+            <div class="time-block">
+                <div class="time-number" id="hoursNum">00</div>
+                <div class="time-label" id="hoursLabel">часов</div>
+            </div>
+            <div class="time-block">
+                <div class="time-number" id="minutesNum">00</div>
+                <div class="time-label" id="minutesLabel">минут</div>
+            </div>
+            <div class="time-block">
+                <div class="time-number" id="secondsNum">00</div>
+                <div class="time-label" id="secondsLabel">секунд</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ФОРМА RSVP ============ -->
+    <section class="section fade-up">
+        <h2>Просим подтвердить Ваше присутствие не позднее 04.07.2026</h2>
+        <div class="form-container">
+            <form id="rsvpForm" action="#" method="post">
+                <input type="text" name="name" id="guestName" placeholder="Ваше имя" required>
+                
+                <select name="attendance" id="attendanceSelect">
+                    <option value="Я приду">Я приду</option>
+                    <option value="Не смогу прийти">Не смогу прийти</option>
+                </select>
+                
+                <label style="display: block; text-align: left; margin-bottom: 4px; font-weight: 500; color: #7f6250;">Какой алкоголь вы предпочитаете?</label>
+                <select name="alcohol" id="alcoholSelect">
+                    <option value="" disabled selected>— выберите вариант —</option>
+                    <option value="Вино (красное/белое)">🍷 Вино (красное/белое)</option>
+                    <option value="Шампанское">🥂 Шампанское</option>
+                    <option value="Водка">🥃 Водка</option>
+                    <option value="Коньяк">🥃 Коньяк</option>
+                    <option value="Не употребляю алкоголь">🚫 Не употребляю алкоголь</option>
+                    <option value="Всё равно / любой">✨ Всё равно / любой</option>
+                </select>
+                
+                <button type="submit" id="submitBtn">Отправить</button>
+            </form>
+            <div id="formMessage" style="margin-top: 16px; font-size: 14px; color: #b38b6d; text-align: center;"></div>
+        </div>
+    </section>
+
+    <!-- ============ КАРТА ============ -->
+    <section class="section map-section fade-up">
+        <h2>Где будет проходить торжество</h2>
+        <div class="map-container">
+            <div id="map" style="width: 100%; height: 400px;"></div>
+        </div>
+        <div class="map-address">
+            <p>📍 Орловская Усадьба</p>
+            <p>г. Набережные Челны, ул. Орловская, д. 88А, 2 этаж</p>
+            <a href="https://yandex.ru/maps/-/CPG94UJ3" target="_blank" class="map-button">Открыть в Яндекс.Картах</a>
+        </div>
+    </section>
+
+    <!-- ============ ВЕДУЩИЙ ============ -->
+    <div class="host-card fade-up">
+        <h3 class="host-title">Ведущий торжества</h3>
+        <div class="host-divider"></div>
+        <p class="host-text">
+            Если у Вас есть сюрприз, творческий номер или вопрос — 
+            Вы всегда можете обратиться к нашему ведущему 😉
+        </p>
+        <div class="host-contact">
+            <span class="host-label">Алмаз</span>
+            <a href="tel:+79274242643" class="host-phone">📞 +7 927 424-26-43</a>
+        </div>
+    </div>
+
+    <!-- ============ ФУТЕР ============ -->
+    <div class="footer-note">
+        <p>Будем ждать Вас<br>19 июня 2027</p>
+        <div class="footer-signature">
+            С любовью, <span class="footer-names">Алина & Дмитрий</span>
+        </div>
+        <div class="footer-heart">❤️</div>
+    </div>
+
+</div> <!-- ЗАКРЫВАЕМ div id="main-content" -->
+
+<!-- ============================================================ -->
+<!-- СКРИПТЫ                                                      -->
+<!-- ============================================================ -->
+
+<!-- Карты -->
+<script src="https://api-maps.yandex.ru/2.1/?apikey=ваш-api-ключ&lang=ru_RU" type="text/javascript"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        // ==========================================
+        // 1. ЛОГИКА КОНВЕРТА И МУЗЫКИ
+        // ==========================================
+        const envelope = document.getElementById('envelope-screen');
+        const mainContent = document.getElementById('main-content');
+        const brideBlock = document.getElementById('brideBlock');
+
+        // Блокируем скролл пока конверт открыт
+        document.body.style.overflow = 'hidden';
+
+        // 👇 УКАЖИТЕ ВАШ ПУТЬ К МУЗЫКЕ 👇
+        const music = new Audio('https://ilidan179.github.io/wedding_Alina_Dima/music/wedding.mp3');
+        music.loop = true;
+
+        envelope.addEventListener('click', function () {
+            // Музыка
+            music.play().catch(e => console.log('Музыка не запустилась:', e));
+            
+            // Анимация
+            envelope.classList.add('opened');
+            mainContent.classList.add('revealed');
+            
+            // Разрешаем скролл
+            document.body.style.overflow = 'auto';
+        });
+
+        // Клик по невесте
+        if (brideBlock) {
+            brideBlock.addEventListener('click', function () {
+                brideBlock.classList.add('revealed');
+            });
+        }
+
+        // ==========================================
+        // 2. ТАЙМЕР (Дата свадьбы)
+        // ==========================================
+        // 👇 ВАЖНО: Дата свадьбы 19 июня 2027 (месяц 5, т.к. отсчет с 0) 👇
+        const weddingDateTime = new Date(2027, 5, 19, 16, 30, 0); 
+
+        function declensionNum(number, words) {
+            const cases = [2, 0, 1, 1, 1, 2];
+            const index = (number % 100 > 4 && number % 100 < 20) ? 2 : cases[Math.min(number % 10, 5)];
+            return words[index];
+        }
+
+        const weeksSpan = document.getElementById('weeksNum');
+        const daysSpan = document.getElementById('daysNum');
+        const hoursSpan = document.getElementById('hoursNum');
+        const minutesSpan = document.getElementById('minutesNum');
+        const secondsSpan = document.getElementById('secondsNum');
+        
+        function animateNumber(element, newValue) {
+            if (!element) return;
+            const currentText = element.innerText;
+            const formattedNew = String(newValue).padStart(2, '0');
+            if (currentText !== formattedNew) {
+                element.classList.add('number-update');
+                setTimeout(() => element.classList.remove('number-update'), 350);
+            }
+            element.innerText = formattedNew;
+        }
+        
+        function updateTimer() {
+            const now = new Date().getTime();
+            const eventTime = weddingDateTime.getTime();
+            let diff = eventTime - now;
+            
+            if (diff <= 0) {
+                animateNumber(weeksSpan, 0); animateNumber(daysSpan, 0);
+                animateNumber(hoursSpan, 0); animateNumber(minutesSpan, 0); animateNumber(secondsSpan, 0);
+                return;
+            }
+            
+            const totalSeconds = Math.floor(diff / 1000);
+            const totalMinutes = Math.floor(totalSeconds / 60);
+            const totalHours = Math.floor(totalMinutes / 60);
+            const totalDays = Math.floor(totalHours / 24);
+            
+            const weeks = Math.floor(totalDays / 7);
+            const days = totalDays % 7;
+            const hours = totalHours % 24;
+            const minutes = totalMinutes % 60;
+            const seconds = totalSeconds % 60;
+            
+            animateNumber(weeksSpan, weeks); animateNumber(daysSpan, days);
+            animateNumber(hoursSpan, hours); animateNumber(minutesSpan, minutes); animateNumber(secondsSpan, seconds);
+            
+            document.getElementById('weeksLabel').innerText = declensionNum(weeks, ['неделя', 'недели', 'недель']);
+            document.getElementById('daysLabel').innerText = declensionNum(days, ['день', 'дня', 'дней']);
+            document.getElementById('hoursLabel').innerText = declensionNum(hours, ['час', 'часа', 'часов']);
+            document.getElementById('minutesLabel').innerText = declensionNum(minutes, ['минута', 'минуты', 'минут']);
+            document.getElementById('secondsLabel').innerText = declensionNum(seconds, ['секунда', 'секунды', 'секунд']);
+        }
+        
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // ==========================================
+        // 3. ОТПРАВКА ФОРМЫ (Google Sheets)
+        // ==========================================
+        // 👇 ВСТАВЬТЕ ВАШУ ССЫЛКУ ИЗ GOOGLE APPS SCRIPT 👇
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/ВАША_ССЫЛКА/exec';
+        
+        const form = document.getElementById('rsvpForm');
+        const messageDiv = document.getElementById('formMessage');
+
+        if (form) {
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('guestName').value.trim();
+                const attendance = document.getElementById('attendanceSelect').value;
+                const alcohol = document.getElementById('alcoholSelect').value;
+                
+                if (!name) {
+                    messageDiv.innerHTML = '💌 Пожалуйста, укажите ваше имя.';
+                    messageDiv.style.color = '#c26a4a';
+                    return;
+                }
+                
+                try {
+                    await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ name, attendance, alcohol })
+                    });
+                    
+                    messageDiv.innerHTML = `✨ ${name}, спасибо! Ваш ответ сохранён.`;
+                    messageDiv.style.color = '#b38b6d';
+                    form.reset();
+                } catch (error) {
+                    messageDiv.innerHTML = '❌ Ошибка. Попробуйте позже.';
+                    messageDiv.style.color = '#c26a4a';
+                }
+            });
+        }
+
+        // ==========================================
+        // 4. АНИМАЦИЯ ПОЯВЛЕНИЯ (fade-up)
+        // ==========================================
+        const fadeElements = document.querySelectorAll('.fade-up');
+        function checkVisibility() {
+            fadeElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                if (rect.top < windowHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', checkVisibility);
+        checkVisibility();
+
+        // ==========================================
+        // 5. КАРТА
+        // ==========================================
+        if (typeof ymaps !== 'undefined') {
+            ymaps.ready(function () {
+                const centerCoords = [55.715839, 52.371556];
+                const map = new ymaps.Map('map', {
+                    center: centerCoords,
+                    zoom: 17,
+                    controls: ['zoomControl', 'fullscreenControl']
+                });
+                map.geoObjects.add(new ymaps.Placemark(centerCoords, {
+                    hintContent: 'Свадебное торжество',
+                    balloonContent: '<strong>Празднование свадьбы</strong><br>Алина & Дмитрий<br>19 июня 2027'
+                }, {
+                    preset: 'islands#circleIcon',
+                    iconColor: '#b17a5c'
+                }));
+            });
+        }
+    });
+</script>
+
+</body>
+</html>            
