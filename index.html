@@ -102,6 +102,7 @@
         }
         #main-content.revealed { opacity: 1; }
 
+
         /* ========== СЕКЦИЯ ЗНАКОМСТВА (ПОЛАРОИД) ========== */
         .reveal-section {
             min-height: 100vh;
@@ -110,47 +111,73 @@
             align-items: center;
             justify-content: center;
             padding: 60px 20px;
-            background: #fdf9f1; /* Теплый бумажный фон */
+            background: #fdf9f1;
             gap: 40px;
         }
 
-        .question {
-            font-family: 'Great Vibes', 'Playfair Display', cursive;
-            font-size: clamp(32px, 6vw, 56px);
-            color: #8e1b12; /* Темно-красный, как на конверте */
-            line-height: 1.2;
+        /* --- Блок с именами (появляется при клике) --- */
+        .names-header {
             text-align: center;
-            transform: rotate(-3deg); /* Легкий наклон, как рукописный текст */
-            margin-bottom: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: opacity 0.8s ease, transform 0.8s ease, visibility 0.8s;
         }
 
+        .names-header.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .names-title {
+            font-family: 'Great Vibes', 'Playfair Display', cursive;
+            font-size: clamp(32px, 6vw, 56px);
+            color: #8e1b12;
+            margin-bottom: 5px;
+            font-weight: 400;
+        }
+
+        .names-date {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(14px, 2vw, 18px);
+            color: #3e2c23;
+            letter-spacing: 2px;
+        }
+
+        /* --- Ряд с фотографиями --- */
         .photos-row {
             display: flex;
             flex-direction: row;
-            align-items: flex-start;
+            align-items: stretch;
             justify-content: center;
-            gap: clamp(20px, 5vw, 60px); /* Расстояние между фото */
+            gap: clamp(15px, 5vw, 60px); 
             width: 100%;
-            max-width: 900px;
+            max-width: 800px;
         }
 
-        /* Стиль карточки Полароид */
+        /* Карточка Полароид */
         .polaroid {
             background: #fff;
-            padding: 15px 15px 50px 15px; /* Снизу больше места для подписи */
+            padding: 15px 15px 0 15px; /* Снизу отступа нет, его задаст подпись */
             box-shadow: 0 15px 35px rgba(0,0,0,0.1), 0 5px 15px rgba(0,0,0,0.05);
             position: relative;
-            width: min(42vw, 320px); /* Адаптивная ширина */
-            aspect-ratio: 3 / 4;
+            width: 45%; /* Занимает почти половину */
+            display: flex;
+            flex-direction: column;
+            border-radius: 4px; /* Легкое скругление, как у бумаги */
         }
 
-        /* Наклоняем фото жениха и невесты для живости */
         .groom-card { transform: rotate(-2deg); }
-        .bride-card { transform: rotate(2deg); }
+        .bride-card { 
+            transform: rotate(2deg); 
+            cursor: pointer;
+        }
 
         .polaroid-img-wrapper {
             width: 100%;
-            height: 100%;
+            /* Задаем высоту так, чтобы фото было красивым, но не гигантским */
+            height: clamp(200px, 45vw, 350px); 
             background: #e0e0e0;
             overflow: hidden;
             position: relative;
@@ -163,75 +190,116 @@
             object-position: center;
         }
 
-        /* Скрепка сверху */
+        /* Белое поле для подписи снизу */
+        .polaroid-caption {
+            height: 80px; /* Фиксированная высота белого поля */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            text-align: center;
+        }
+
+        .polaroid-caption span {
+            font-family: 'Great Vibes', 'Playfair Display', cursive;
+            font-size: clamp(22px, 4vw, 32px);
+            line-height: 1.1;
+            color: #8e1b12; /* Одинаковый цвет для обеих подписей */
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Подпись невесты скрыта, пока не нажмут */
+        .bride-card .polaroid-caption span {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .bride-card.revealed .polaroid-caption span {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Скрепка */
         .paperclip {
             position: absolute;
-            top: -25px;
-            right: 30px;
-            font-size: 50px;
-            color: #8e1b12;
-            transform: rotate(10deg);
-            z-index: 10;
+            top: -22px;
+            right: 20px;
+            width: clamp(25px, 6vw, 40px);
+            height: clamp(40px, 9vw, 60px);
+            z-index: 15;
             filter: drop-shadow(0 4px 5px rgba(0,0,0,0.3));
-            /* Рисуем скрепку через SVG фон, чтобы она выглядела реалистично */
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238e1b12' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
-            width: 40px;
-            height: 60px;
+            transform: rotate(10deg);
         }
 
-        /* Красная бумага для невесты */
+        /* Красный лист, закрывающий ВСЮ карточку невесты */
         .bride-cover {
             position: absolute;
-            inset: 0;
-            background: #7a1010; /* Темно-красный */
+            inset: -1px;
+            background: #7a1010;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             padding: 20px;
-            cursor: pointer;
             transition: transform 0.8s cubic-bezier(0.4, 0.1, 0.2, 1), opacity 0.8s ease;
-            transform-origin: right center; /* Открывается как книжка */
-            z-index: 5;
+            transform-origin: right center;
+            z-index: 10;
+            border-radius: 4px;
         }
 
         .bride-cover span {
             color: #fff;
             font-family: 'Montserrat', sans-serif;
-            font-size: clamp(16px, 3vw, 22px);
+            font-size: clamp(14px, 2.5vw, 20px);
             font-weight: 500;
             letter-spacing: 1px;
             text-transform: uppercase;
+            line-height: 1.5;
         }
 
-        /* Анимация открытия невесты */
+        /* Анимации при клике */
         .bride-card.revealed .bride-cover {
             transform: rotateY(-110deg);
             opacity: 0;
             pointer-events: none;
         }
 
-        /* Подпись "-ей буду я!" */
-        .bride-caption {
-            position: absolute;
-            bottom: 10px;
-            right: 20px;
-            font-family: 'Great Vibes', 'Playfair Display', cursive;
-            font-size: clamp(28px, 5vw, 42px);
-            color: #8e1b12;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.6s ease 0.6s, transform 0.6s ease 0.6s;
-            z-index: 6;
-        }
+        /* Адаптация для телефонов */
+        @media (max-width: 600px) {
+            .photos-row {
+                gap: 15px;
+            }
+            .polaroid {
+                padding: 8px 8px 0 8px;
+                width: 44vw;
+            }
+            .polaroid-img-wrapper {
+                height: clamp(150px, 40vw, 220px); /* Меньше высота на телефонах */
+            }
+            .polaroid-caption {
+                height: 60px; /* Меньше белое поле */
+            }
+            .paperclip {
+                width: 30px;
+                height: 45px;
+                right: 15px;
+                top: -20px;
+            }
+        }        
 
-        .bride-card.revealed .bride-caption {
-            opacity: 1;
-            transform: translateY(0);
+        /* Адаптация для телефонов */
+        @media (max-width: 600px) {
+            .polaroid-img-wrapper {
+                height: clamp(150px, 45vw, 240px);
+            }
+            .captions-row {
+                padding: 0;
+            }
         }
-
+   
         /* Адаптация для телефонов */
         @media (max-width: 600px) {
             .photos-row {
@@ -750,32 +818,43 @@
     <!-- ============ СЕКЦИЯ: ЖЕНИХ + СКРЫТАЯ НЕВЕСТА ============ -->
     <section class="reveal-section">
         
-        <p class="question">интересно, кто будет<br>моей женой?</p>
+        <!-- Блок с именами (скрыт, пока не нажмут на невесту) -->
+        <div class="names-header" id="namesBlock">
+            <h1 class="names-title">Дмитрий и Алина</h1>
+            <div class="names-date">19 июня 2027</div>
+        </div>
 
         <div class="photos-row">
             
             <!-- ФОТО ЖЕНИХА -->
             <div class="polaroid groom-card">
                 <div class="polaroid-img-wrapper">
-                    <!-- 👇👇👇 ЗАМЕНИТЕ ССЫЛКУ НА ФОТО ЖЕНИХА 👇👇👇 -->
                     <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/groom.jpg" alt="Жених">
+                </div>
+                <!-- Белое поле с подписью внутри карточки -->
+                <div class="polaroid-caption">
+                    <span>интересно, кто будет<br>моей женой?</span>
                 </div>
             </div>
 
             <!-- ФОТО НЕВЕСТЫ (СКРЫТОЕ) -->
             <div class="polaroid bride-card" id="brideBlock">
-                <div class="paperclip"></div> <!-- Скрепка -->
                 <div class="polaroid-img-wrapper">
-                    <!-- 👇👇👇 ЗАМЕНИТЕ ССЫЛКУ НА ФОТО НЕВЕСТЫ 👇👇👇 -->
                     <img src="https://ilidan179.github.io/wedding_Alina_Dima/images/bride.jpg" alt="Невеста">
-                    
-                    <!-- Красная бумага, которая закрывает фото -->
-                    <div class="bride-cover">
-                        <span>Кликни,<br>чтобы узнать</span>
-                    </div>
                 </div>
-                <!-- Подпись, которая появится после клика -->
-                <p class="bride-caption">-ей буду я!</p>
+                
+                <!-- Белое поле с подписью (скрыто по умолчанию) -->
+                <div class="polaroid-caption">
+                    <span>-ей буду я!</span>
+                </div>
+
+                <!-- Красная бумага накрывает карточку целиком -->
+                <div class="bride-cover">
+                    <span>Кликни,<br>чтобы узнать</span>
+                </div>
+
+                <!-- Скрепка -->
+                <div class="paperclip"></div>
             </div>
 
         </div>
@@ -797,9 +876,8 @@
         <div class="invite-content">
             <h2>Дорогой <br>Гость!</h2>
             <p>
-                Мы приглашаем Вас разделить<br>
-                с нами радостный день, в который<br>
-                мы официально станем семьей
+                Мы выбрали друг друга<br>
+                А разделить радость этого дня хотим с вами<br>
             </p>
             <p class="signature" style="margin-top: 24px; font-family: 'Great Vibes', cursive; font-size: 28px;">Ждем Вас</p>
             <p style="margin-top: 16px; font-size: 18px;">19.06.2027 в 16:30</p>
@@ -1012,10 +1090,17 @@
             document.body.style.overflow = 'auto';
         });
 
-        // Клик по невесте
+        // Клик по невесте (открыть/закрыть)
         if (brideBlock) {
             brideBlock.addEventListener('click', function () {
-                brideBlock.classList.add('revealed');
+                // Открывает красный лист и подпись внутри карточки
+                brideBlock.classList.toggle('revealed');
+                
+                // Показывает блок с именами и датой наверху
+                const namesBlock = document.getElementById('namesBlock');
+                if (namesBlock) {
+                    namesBlock.classList.add('show');
+                }
             });
         }
 
