@@ -27,16 +27,16 @@
             position: fixed;
             inset: 0;
             z-index: 9999;
-            /* Убираем темный фон, чтобы сайт сразу был виден под конвертом */
-            background: transparent; 
+            /* 👇 ДОБАВЛЯЕМ ПОДЛОЖКУ, чтобы сайт не просвечивал 👇 */
+            background: #1a0303; 
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             overflow: hidden;
             perspective: 2000px;
-            /* Плавное исчезновение контейнера в самом конце */
-            transition: opacity 1s ease 2s, visibility 1s ease 2s; 
+            /* Плавное исчезновение подложки в конце */
+            transition: opacity 1s ease 3s, visibility 1s ease 3s; 
         }
 
         #envelope-screen.opened {
@@ -47,8 +47,20 @@
 
         .envelope-wrapper {
             position: relative;
-            width: 100vw;
-            height: 100vh;
+            /* 👇 АДАПТИВНЫЕ ПРОПОРЦИИ 👇 */
+            width: min(85vw, 1200px);
+            height: min(70vh, 800px);
+            /* Тень вокруг всего конверта, чтобы он выделялся */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            border-radius: 4px;
+        }
+
+        /* На телефонах конверт должен быть повыше */
+        @media (max-width: 768px) {
+            .envelope-wrapper {
+                width: 90vw;
+                height: 60vh; 
+            }
         }
 
         /* Створки */
@@ -56,8 +68,9 @@
             position: absolute;
             width: 100%;
             height: 100%;
-            /* Плавное движение (4 секунды) */
             transition: transform 4s ease-in-out;
+            /* Легкая тень, чтобы треугольники отделялись друг от друга */
+            box-shadow: 0 0 20px rgba(0,0,0,0.3) inset;
         }
 
         .env-left {
